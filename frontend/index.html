@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notary Everyday - ID Verify AI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb bg-orb-a"></div>
+  <div class="bg-orb bg-orb-b"></div>
+  <div class="grid-overlay"></div>
+
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">ID</div>
+        <div>
+          <p class="brand-kicker">NOTARY EVERYDAY</p>
+          <h1 class="brand-title">ID Verify AI</h1>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div class="status-badge" id="healthBadge">Checking API...</div>
+        <div class="header-chip">Document Intelligence Platform</div>
+        <div class="accessibility-wrap">
+          <button
+            id="accessibilityToggle"
+            class="icon-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="accessibilityPanel"
+            aria-label="Open accessibility options"
+          >
+            Accessibility
+          </button>
+          <div id="accessibilityPanel" class="accessibility-panel hidden" role="dialog" aria-label="Accessibility options">
+            <div class="accessibility-header">
+              <div>
+                <p class="section-kicker">Accessibility</p>
+                <h4>Personalize the interface</h4>
+              </div>
+            </div>
+            <label class="accessibility-option">
+              <span>Large text</span>
+              <input id="toggleLargeText" type="checkbox" />
+            </label>
+            <label class="accessibility-option">
+              <span>High contrast</span>
+              <input id="toggleHighContrast" type="checkbox" />
+            </label>
+            <label class="accessibility-option">
+              <span>Reduce motion</span>
+              <input id="toggleReduceMotion" type="checkbox" />
+            </label>
+            <label class="accessibility-option">
+              <span>Color-blind friendly palette</span>
+              <input id="toggleColorBlindPalette" type="checkbox" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="hero-pill">Powered By Compliance-Aware AI</div>
+        <h2>Identity Verification Reimagined.</h2>
+        <p class="subtitle">AI-powered document authentication for notarization. Detects presentation fraud, extracts critical fields, cross-checks identity documents, and surfaces compliance flags in seconds.</p>
+        <div class="stage-rail" aria-label="Verification stages">
+          <div class="stage-item active">
+            <span class="stage-number">1</span>
+            <span>Upload</span>
+          </div>
+          <div class="stage-item">
+            <span class="stage-number">2</span>
+            <span>Configure</span>
+          </div>
+          <div class="stage-item">
+            <span class="stage-number">3</span>
+            <span>Analyze</span>
+          </div>
+          <div class="stage-item">
+            <span class="stage-number">4</span>
+            <span>Results</span>
+          </div>
+        </div>
+        <div class="level-pills">
+          <span class="level-pill level-1">LV1 Authenticity</span>
+          <span class="level-pill level-2">LV2 Extraction</span>
+          <span class="level-pill level-3">LV3 Cross-Doc</span>
+          <span class="level-pill level-4">LV4 Compliance</span>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <p class="eyebrow">Workflow Overview</p>
+        <ol class="hero-list">
+          <li>Upload one ID for authenticity and extraction.</li>
+          <li>Surface field-level JSON for the notary packet.</li>
+          <li>Switch to multi-document comparison.</li>
+          <li>Highlight compliance warnings and hard flags.</li>
+        </ol>
+        <div class="hero-signal-stack">
+          <div class="hero-signal">
+            <span class="signal-dot success"></span>
+            <div>
+              <strong>Packet readiness</strong>
+              <p>Turn document review into an approve, review, or stop decision.</p>
+            </div>
+          </div>
+          <div class="hero-signal">
+            <span class="signal-dot info"></span>
+            <div>
+              <strong>Explainable risk</strong>
+              <p>Show exactly which signals and compliance rules drove the recommendation.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <main class="dashboard">
+      <section class="panel panel-results">
+        <div class="panel-header">
+          <div>
+            <p class="section-kicker">Results</p>
+            <h3>Verification Console</h3>
+          </div>
+          <div class="panel-actions">
+            <div id="consoleStatusChip" class="header-chip subtle">Awaiting Input</div>
+            <button id="copyReportBtn" class="ghost-action" type="button">Copy Report</button>
+            <button id="downloadReportBtn" class="ghost-action" type="button">Download Report</button>
+          </div>
+        </div>
+
+        <div id="insightStrip" class="insight-strip">
+          <article class="insight-card">
+            <p>Mode</p>
+            <h4 id="metricMode">Single Doc</h4>
+          </article>
+          <article class="insight-card">
+            <p>Risk Posture</p>
+            <h4 id="metricRisk">Awaiting</h4>
+          </article>
+          <article class="insight-card">
+            <p>Fields Captured</p>
+            <h4 id="metricFields">0 / 8</h4>
+          </article>
+          <article class="insight-card">
+            <p>Critical Flags</p>
+            <h4 id="metricFlags">0</h4>
+          </article>
+        </div>
+
+        <div class="output-switcher" role="tablist" aria-label="Comparison output mode">
+          <button id="singleDocTab" class="switch-btn active" type="button" role="tab" aria-selected="true" aria-controls="singleDocPanel">Single Doc</button>
+          <button id="multiDocTab" class="switch-btn" type="button" role="tab" aria-selected="false" aria-controls="multiDocPanel" tabindex="-1">Multiple Doc</button>
+        </div>
+
+        <div id="singleDocPanel" role="tabpanel" aria-labelledby="singleDocTab">
+          <div class="workspace-grid">
+            <aside class="workspace-sidebar">
+              <section class="mode-controls preview-controls">
+                <div class="mode-header">
+                  <div>
+                    <p class="section-kicker">Single-Document Mode</p>
+                    <h4>Upload one document and review it in place</h4>
+                  </div>
+                </div>
+                <label class="input-label sr-only" for="singleDocFile">Choose single document</label>
+                <input type="file" id="singleDocFile" accept="image/*,.pdf,.txt,.text,.json,.csv,.md,.html,.htm,.xml,.docx" />
+                <button id="singleDocRunBtn" type="button">Run Single-Doc Check</button>
+                <p id="singleDocStatus" class="muted status-line" role="status" aria-live="polite"></p>
+              </section>
+
+              <section class="preview-card">
+                <div class="preview-header">
+                  <p class="section-kicker">Document Preview</p>
+                  <h4 id="singlePreviewTitle">No file selected</h4>
+                </div>
+                <div id="singleDocPreview" class="preview-surface empty-preview">Upload a file to see it here before running analysis.</div>
+              </section>
+            </aside>
+
+            <div class="workspace-results">
+              <div id="resultSummary" class="empty-state" role="status" aria-live="polite">Upload an ID to populate the single-document verification console.</div>
+
+              <div id="resultGrid" class="result-grid hidden">
+                <section class="result-card hero-result">
+                  <h4>Topline</h4>
+                  <div id="topline"></div>
+                </section>
+                <section class="result-card">
+                  <h4>Packet Readiness</h4>
+                  <div id="readiness"></div>
+                </section>
+                <section class="result-card">
+                  <h4>Fraud Signals</h4>
+                  <div id="signals"></div>
+                </section>
+                <section class="result-card">
+                  <h4>Single-Document Compliance</h4>
+                  <div id="compliance"></div>
+                </section>
+                <section class="result-card">
+                  <h4>Structured JSON</h4>
+                  <pre id="jsonOutput"></pre>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="multiDocPanel" class="hidden" role="tabpanel" aria-labelledby="multiDocTab">
+          <div class="workspace-grid">
+            <aside class="workspace-sidebar">
+              <section class="mode-controls preview-controls">
+                <div class="mode-header">
+                  <div>
+                    <p class="section-kicker">Multi-Document Mode</p>
+                    <h4>Place both files side by side before comparison</h4>
+                  </div>
+                </div>
+                <label class="input-label">Primary document<input type="file" id="multiPrimaryFile" accept="image/*,.pdf,.txt,.text,.json,.csv,.md,.html,.htm,.xml,.docx" /></label>
+                <label class="input-label">Second document<input type="file" id="multiSecondaryFile" accept="image/*,.pdf,.txt,.text,.json,.csv,.md,.html,.htm,.xml,.docx" /></label>
+                <button id="multiDocRunBtn" type="button">Run Multi-Doc Check</button>
+                <p id="multiDocStatus" class="muted status-line" role="status" aria-live="polite"></p>
+              </section>
+
+              <div class="stacked-previews">
+                <section class="preview-card">
+                  <div class="preview-header">
+                    <p class="section-kicker">Primary Preview</p>
+                    <h4 id="multiPrimaryPreviewTitle">No file selected</h4>
+                  </div>
+                  <div id="multiPrimaryPreview" class="preview-surface empty-preview">Add the first document to preview it here.</div>
+                </section>
+                <section class="preview-card">
+                  <div class="preview-header">
+                    <p class="section-kicker">Second Preview</p>
+                    <h4 id="multiSecondaryPreviewTitle">No file selected</h4>
+                  </div>
+                  <div id="multiSecondaryPreview" class="preview-surface empty-preview">Add the second document to preview it here.</div>
+                </section>
+              </div>
+            </aside>
+
+            <div class="workspace-results">
+              <div id="compareResult" class="empty-state" role="status" aria-live="polite">Upload two documents to compare their identity fields and compliance risk.</div>
+              <section id="multiJsonCard" class="result-card hidden">
+                <h4>Structured JSON</h4>
+                <pre id="multiJsonOutput"></pre>
+              </section>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
