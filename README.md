@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CareCaller Full Stack
 
 CareCaller is a healthcare voice triage demo built for hackathon judging. The default package is set up to be stable first:
@@ -94,3 +95,7 @@ Use the app to show:
 - urgency routing
 
 Then mention that Common Voice was used to benchmark accent robustness.
+=======
+# trustseal-ai
+AI-powered document verification platform for notarization workflows — OCR extraction, fraud signal detection, cross-document comparison, and compliance flagging with FastAPI backend
+>>>>>>> 6b474e40d2eca22bdcc9dd8c11a94c4b825f4d81
