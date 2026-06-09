@@ -10,8 +10,6 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?logo=fastapi)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript)
 
-*Built by Shashwat Rao Balaji & Abhijit V · Hackathon Project · 2026*
-
 </div>
 
 ---
