@@ -1,1 +1,13 @@
--r backend/requirements.txt
+--extra-index-url https://download.pytorch.org/whl/cpu
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+opencv-python-headless==4.10.0.84
+numpy==2.1.1
+pydantic==2.9.2
+pydantic-settings==2.5.2
+torch
+torchvision
+easyocr==1.7.1
+Pillow==10.4.0
+pypdf==5.4.0
